@@ -17,8 +17,8 @@ const Error = () => {
 };
 const Wrapper = styled.section`
   min-height: 100vh;
-  display: grid;
-  place-items: center;
+  display: grid; 
+  place-items: center; 
   background: var(--clr-primary-10);
   text-align: center;
   h1 {
