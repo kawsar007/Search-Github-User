@@ -16,18 +16,41 @@ const GithubProvider = ({children}) => {
 
     // Request, Loading
     const [ requests, setRequests ] = useState(0);
-    const [ loading, setLoading ] = useState(false);
+    const [ isLoading, setIsLoading ] = useState(false);
     const [ error, setError ] = useState({show: false, msg: ''});
       
     const searchGithubUser = async(user) => {
         toggleError();
+        setIsLoading(true);
         const response = await axios(`${rootUrl}/users/${user}`)
            .catch(err => console.log(err))
            if(response) {
-               setGithubUser(response.data)
+               setGithubUser(response.data);
+               const { login, followers_url } = response.data;
+            //    await Promise.allSettled([
+            //     axios(`${rootUrl}/users/${login}/repos?per_page=100`),
+            //     axios(`${followers_url}?per_page=100`),
+            //    ]).then((results) => {
+            //        const [repos, followers] = results;
+            //        const status = 'fulfilled';
+            //        if(repos.status === status) {
+            //            setRepos(repos.value.data);
+            //        }
+            //        if(followers.status === status) {
+            //         setRepos(followers.value.data);
+            //     }
+            //    });
+            // Repos
+                axios(`${rootUrl}/users/${login}/repos?per_page=100`)
+                 .then(response => setRepos(response?.data))
+            // Followers
+                axios(`${followers_url}?per_page=100`)
+                 .then(response => setFollowers(response?.data));
            } else {
-               toggleError(true, 'there is no user with that username')
+               toggleError(true, 'there is no user with that username');
            }
+           checkRequest();
+           setIsLoading(false);
     }
 
     const checkRequest = () => {
@@ -55,7 +78,7 @@ const GithubProvider = ({children}) => {
     }
 
     return (
-       <GithubContext.Provider value={{githubUser, repos, followers, requests, error, searchGithubUser}}>
+       <GithubContext.Provider value={{githubUser, repos, followers, requests, error, searchGithubUser, isLoading}}>
            {children}
        </GithubContext.Provider>
     )

@@ -4,12 +4,22 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { GithubProvider } from './context/context';
+import { Auth0Provider } from '@auth0/auth0-react';
+
+// Domain: dev-9tnznwfn.us.auth0.com
+// Client Id: z81n5IqNwpBcxvAbTN9WSNVKSD6t44o6
 
 ReactDOM.render(
   <React.StrictMode>
+    <Auth0Provider
+       domain= "dev-9tnznwfn.us.auth0.com"
+       clientId="z81n5IqNwpBcxvAbTN9WSNVKSD6t44o6"
+       redirectUrl={window.location.origin}
+    >
     <GithubProvider>
        <App />
     </GithubProvider>
+    </Auth0Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
