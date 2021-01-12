@@ -6,7 +6,7 @@ import { GithubContext } from '../context/context';
 const Search = () => {
     const [ user, setUser ] = useState('');
 
-    const {requests, error, searchGithubUser, isLoading} = React.useContext(GithubContext);
+    const {requests, error, searchGithubUser } = React.useContext(GithubContext);
     console.log(requests, "Rate");
 
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-dupe-keys */
 // STEP 1 - Include Dependencies
 // Include react
 import React from "react";
@@ -23,28 +24,29 @@ ReactFC.fcRoot(FusionCharts, Chart, FusionTheme);
 // STEP 3 - Creating the JSON object to store the chart configurations
 
 
-const ChartComponent = ({data}) => {
+const ChartComponent = ({ data }) => {
     const chartConfigs = {
         type: "doughnut2d", // The chart type
         width: "100%", // Width of the chart
         height: "400", // Height of the chart
         dataFormat: "json", // Data type
         dataSource: {
-          // Chart Configuration
-          chart: {
-            //Set the chart caption
-            caption: "Stars Per Language",
-            theme: "fusion",
-            decimals: 0,
-            doughnutRadius: '45%',
-            showPercentValues: 0,
-            theme: 'candy'
-          },
-          // Chart Data
-          data
+            // Chart Configuration
+            chart: {
+                //Set the chart caption
+                caption: "Stars Per Language",
+                theme: "fusion",
+                decimals: 0,
+                doughnutRadius: '45%',
+                showPercentValues: 0,
+                theme: 'candy'
+            },
+            // Chart Data
+            data
         }
-      };
-    return <ReactFC {...chartConfigs} />
+    };
+    return <ReactFC {...chartConfigs }
+    />
 }
 
 
