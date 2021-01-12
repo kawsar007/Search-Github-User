@@ -4,22 +4,26 @@ import Login from './pages/Login';
 import Error from './pages/Error';
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import PrivateRoute from './pages/PrivateRoute';
+import AuthWrapper from './pages/AuthWrapper';
 
 function App() {
   return (
+    <AuthWrapper>
     <Router>
       <Switch>
-       <Route path="/" exact={true}>
+       <PrivateRoute path="/" exact={true}>
           <Dashboard></Dashboard>
-       </Route>
+       </PrivateRoute>
        <Route path="/login">
-         <Login/>
+         <Login></Login>
        </Route>
        <Route path="*">
          <Error></Error>
        </Route>
        </Switch>
     </Router>
+    </AuthWrapper>
   );
 }
 
